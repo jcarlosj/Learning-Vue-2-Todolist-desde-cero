@@ -1,0 +1,13 @@
+
+.tasks input {
+    border: 0;
+}
+
+.tasks input:focus {
+    outline: none;
+}
+
+.completed {
+    color: #999;
+    text-decoration: line-through;
+}
