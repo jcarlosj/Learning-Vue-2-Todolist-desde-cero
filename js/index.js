@@ -2,6 +2,7 @@
 let task = new Vue({
     el: '#app',
     data: {
+        new_task: '',
         tasks: [
             {
                 description: 'Aprender Foundation',
@@ -24,5 +25,15 @@ let task = new Vue({
                 editing: false
             }
         ]
+    },
+    methods: {
+        createTask() {
+            this .tasks .push({
+                description: this .new_task,
+                pending: true,
+                editing: false
+            });
+            this .new_task = '';
+        }
     }
 });

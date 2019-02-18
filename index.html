@@ -52,9 +52,9 @@
               </li>
             </ul>
             <br>
-            <form class="form-row">
+            <form @submit.prevent="createTask" class="form-row">
                 <div class="col-9">
-                    <input class="form-control" type="text">
+                    <input v-model="new_task" class="form-control" type="text">
                 </div>
                 <div class="col-3 ">
                     <button class="btn btn-primary w-100">Agregar tarea</button>
