@@ -1,5 +1,4 @@
 // Code Vue
-
 // Define Componente Global
 Vue .component( 'app-icon', {
     template: '<i class="material-icons">{{ typeIcon }}</i>',
@@ -10,7 +9,21 @@ Vue .component( 'app-icon', {
         }
     }
 });
+Vue .component( 'app-task', {
+    template: '#task-template',
+    props: [ 'task', 'index' ],
+    methods: {
+        editTask( task ) {
+            // Evita que pueda editar multiples tareas
+            this .tasks .forEach( ( task ) => {
+                task .editing = false;
+            });
 
+            this .draft = task .description;   // Crea Borrador de la tarea
+            task .editing = true;
+        }
+    }
+});
 // Instancia
 let task = new Vue({
     el: '#app',
@@ -51,15 +64,6 @@ let task = new Vue({
         },
         toggleStatus: function( task ) {
             task .pending = !task .pending;
-        },
-        editTask( task ) {
-            // Evita que pueda editar multiples tareas
-            this .tasks .forEach( ( task ) => {
-                task .editing = false;
-            });
-
-            this .draft = task .description;   // Crea Borrador de la tarea
-            task .editing = true;
         },
         updateTask( task ) {
             task .description = this .draft;   // Actualiza la descripción de la tarea
