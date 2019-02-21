@@ -34,8 +34,7 @@
             <ul class="list-group tasks">
               <li v-for="(task, index) in tasks" class="list-group-item d-flex justify-content-between align-items-center">
                 <a @click="toggleStatus( task )" class="btn btn-link btn-sm" :class="!task .pending ? 'checkbox-disabled' : ''" href="#">
-                    <span v-if="task .pending"><app-icon type="check_box_outline_blank"></span>
-                    <span v-else><app-icon type="check_box"></span>
+                    <app-icon :type="task .pending ? 'check_box_outline_blank' : 'check_box'">
                 </a>
 
                 <template v-if="!task .editing">
