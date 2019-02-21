@@ -3,6 +3,7 @@ let task = new Vue({
     el: '#app',
     data: {
         new_task: '',
+        draft: '',
         tasks: [
             {
                 description: 'Aprender Foundation',
@@ -12,7 +13,7 @@ let task = new Vue({
             {
                 description: 'Aprender Angular',
                 pending: true,
-                editing: true
+                editing: false
             },
             {
                 description: 'Aprender Gulp',
@@ -34,6 +35,25 @@ let task = new Vue({
                 editing: false
             });
             this .new_task = '';
+        },
+        toggleStatus: function( task ) {
+            task .pending = !task .pending;
+        },
+        editTask( task ) {
+            // Evita que pueda editar multiples tareas
+            this .tasks .forEach( ( task ) => {
+                task .editing = false;
+            });
+
+            this .draft = task .description;   // Crea Borrador de la tarea
+            task .editing = true;
+        },
+        updateTask( task ) {
+            task .description = this .draft;   // Actualiza la descripción de la tarea
+            task .editing = false;
+        },
+        discardTask( task ) {
+            task .editing = false;
         }
     }
 });

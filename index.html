@@ -33,20 +33,20 @@
 
             <ul class="list-group tasks">
               <li v-for="task in tasks" class="list-group-item d-flex justify-content-between align-items-center">
-                <a class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><i class="material-icons">{{task .pending ? 'check_box_outline_blank' : 'check_box' }}</i></a>
+                <a @click="toggleStatus( task )" class="btn btn-link btn-sm" :class="!task .pending ? 'checkbox-disabled' : ''" href="#"><i class="material-icons">{{task .pending ? 'check_box_outline_blank' : 'check_box' }}</i></a>
 
                 <template v-if="!task .editing">
                     <span class="pl-2 pr-2 flex-grow-1" :class="{ editing: task .editing, completed: !task .pending }">{{ task .description }}</span>
                     <span>
-                        <a class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><i class="material-icons">edit</i></a>
+                        <a @click="editTask( task )" class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><i class="material-icons">edit</i></a>
                         <a class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><i class="material-icons">delete</i></a>
                     </span>
                 </template>
                 <template v-else>
-                    <input class="w-75" type="text" v-model="task .description">
-                    <span class="">
-                        <a class="btn btn-link btn-sm" href="#"><i class="material-icons">done</i></a>
-                        <a class="btn btn-link btn-sm" href="#"><i class="material-icons">close</i></a>
+                    <input class="w-75" type="text" v-model="draft">
+                    <span>
+                        <a @click="updateTask( task )" class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><i class="material-icons">done</i></a>
+                        <a @click="discardTask( task )" class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><i class="material-icons">close</i></a>
                     </span>
                 </template>
               </li>

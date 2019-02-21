@@ -7,7 +7,34 @@
     outline: none;
 }
 
+.checkbox-disabled, .checkbox-disabled:hover {
+    color: #6c757d;
+}
+
 .completed {
     color: #999;
     text-decoration: line-through;
+}
+
+
+.tasks {
+    margin-bottom: 40px;
+}
+
+.tasks a {
+    text-decoration: none;
+}
+
+.tasks li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tasks li.editing {
+    box-shadow: inset 0 0 5px #999;
+}
+
+.tasks input, .tasks .description {
+    flex: 1;
+    padding: 0 5px;
 }
