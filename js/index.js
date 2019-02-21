@@ -57,6 +57,11 @@ let task = new Vue({
         },
         deleteTask( index ) {
             this .tasks .splice( index, 1 );
+        },
+        deleteTasksCompleted() {
+            this .tasks = this .tasks .filter( ( task ) => {
+                return task .pending;
+            });
         }
     }
 });

@@ -51,6 +51,7 @@
                 </template>
               </li>
             </ul>
+            <a @click="deleteTasksCompleted()" href="#">Eliminar todas las tareas completadas</a>
             <br>
             <form @submit.prevent="createTask" class="form-row">
                 <div class="col-9">
