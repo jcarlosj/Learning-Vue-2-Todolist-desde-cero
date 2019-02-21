@@ -1,4 +1,17 @@
 // Code Vue
+
+// Define Componente Global
+Vue .component( 'app-icon', {
+    template: '<i class="material-icons">{{ typeIcon }}</i>',
+    props: [ 'type' ],
+    computed: {
+        typeIcon() {
+            return this .type;
+        }
+    }
+});
+
+// Instancia
 let task = new Vue({
     el: '#app',
     data: {
