@@ -54,6 +54,9 @@ let task = new Vue({
         },
         discardTask( task ) {
             task .editing = false;
+        },
+        deleteTask( index ) {
+            this .tasks .splice( index, 1 );
         }
     }
 });
