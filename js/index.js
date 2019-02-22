@@ -40,7 +40,8 @@ Vue .component( 'app-task', {
             this .editing = false;
         },
         remove() {
-            this .$parent .tasks .splice( this .index, 1 );
+            this .$emit( 'remove', this .index );       // Emite un evento de nombre 'remove' y el argumento de dicho evento (índice de la tarea a eliminar)
+            console .log( 'Crea evento personalizado "remove" y lo lanza o ejecuta' );
         }
     }
 });
@@ -76,6 +77,9 @@ let task = new Vue({
                 editing: false
             });
             this .new_task = '';
+        },
+        deleteTask( index ) {                             // 'index' hace parte de la deficinion del componente 'app-task'
+            this .tasks .splice( index, 1 );              // Elimina la tarea del Array con el indice indicado 'index'
         },
         deleteTasksCompleted() {
             this .tasks = this .tasks .filter( ( task ) => {
