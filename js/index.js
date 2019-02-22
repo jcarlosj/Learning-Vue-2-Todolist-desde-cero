@@ -46,25 +46,27 @@ let task = new Vue({
         tasks: [
             {
                 description: 'Aprender Foundation',
-                pending: true,
-                editing: false
+                pending: true
             },
             {
                 description: 'Aprender Angular',
-                pending: true,
-                editing: false
+                pending: true
             },
             {
                 description: 'Aprender Gulp',
-                pending: false,
-                editing: false
+                pending: false
             },
             {
                 description: 'Aprender Vue',
-                pending: false,
-                editing: false
+                pending: false
             }
         ]
+    },
+    created() {
+        this .tasks .forEach( function( task ) {
+            // task .editing = false;               // Crea la propiedad editting para todas las tareas (SIN getters & setters como una propiedad nativa del objeto 'task')
+            this .$set( task, 'editing', false );   // Crea la propiedad editting para todas las tareas (CON getters & setters como una propiedad nativa del objeto 'task')
+        }. bind( this ));                           // Permite asociar this al flujo interno del callback
     },
     methods: {
         createTask() {
