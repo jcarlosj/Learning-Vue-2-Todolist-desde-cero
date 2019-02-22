@@ -1,4 +1,6 @@
 // Code Vue
+let EventBus = new Vue;
+
 // Define Componente Global
 Vue .component( 'app-icon', {
     template: '<i class="material-icons">{{ typeIcon }}</i>',
@@ -18,13 +20,20 @@ Vue .component( 'app-task', {
     },
     template: '#task-template',
     props: [ 'task', 'index' ],     // task e index están disponibles dentro del componente (por lo que podemos hacer referencia a task usando this)
+    created() {
+        // Escucha Evento
+        EventBus .$on( 'editing', function( index ) {
+            if( index != this .index ) {
+                this .discard();
+                console .log( 'Discarting: ' + this .index );
+            }
+        } .bind( this ));       // Para asegurarnos que dentro de nuestra función anónima this se refiere al componente
+    },
     methods: {
         edit() {
-            // Evita que pueda editar multiples tareas
-            // FIXME:  this .editing ya no hace parte de la propiedad (he quitado 'task' como parámetro del callback y funciona)
-            this .$parent .tasks .forEach( () => {
-                this .editing = false;
-            });
+            // Emite un evento: Evita que pueda editar multiples tareas
+            console .info( 'Editing: ' + this .index  );
+            EventBus .$emit( 'editing', this .index );
 
             this .draft = this .task .description;   // Crea Borrador de la tarea
             this .editing = true;
