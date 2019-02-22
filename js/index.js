@@ -11,16 +11,29 @@ Vue .component( 'app-icon', {
 });
 Vue .component( 'app-task', {
     template: '#task-template',
-    props: [ 'task', 'index' ],
+    props: [ 'tasks', 'task', 'index' ],     // tasks, task e index están disponibles dentro del componente (por lo que podemos hacer referencia a task usando this)
     methods: {
-        editTask( task ) {
+        editTask() {
             // Evita que pueda editar multiples tareas
-            this .tasks .forEach( ( task ) => {
-                task .editing = false;
+            this .tasks .forEach( () => {
+                this .task .editing = false;
             });
 
-            this .draft = task .description;   // Crea Borrador de la tarea
-            task .editing = true;
+            this .draft = this .task .description;   // Crea Borrador de la tarea
+            this .task .editing = true;
+        },
+        toggleStatus: function() {
+            this .task .pending = !this .task .pending;
+        },
+        updateTask() {
+            this .task .description = this .draft;   // Actualiza la descripción de la tarea
+            this .task .editing = false;
+        },
+        discardTask() {
+            this .task .editing = false;
+        },
+        deleteTask() {
+            this .tasks .splice( this .index, 1 );
         }
     }
 });
@@ -61,19 +74,6 @@ let task = new Vue({
                 editing: false
             });
             this .new_task = '';
-        },
-        toggleStatus: function( task ) {
-            task .pending = !task .pending;
-        },
-        updateTask( task ) {
-            task .description = this .draft;   // Actualiza la descripción de la tarea
-            task .editing = false;
-        },
-        discardTask( task ) {
-            task .editing = false;
-        },
-        deleteTask( index ) {
-            this .tasks .splice( index, 1 );
         },
         deleteTasksCompleted() {
             this .tasks = this .tasks .filter( ( task ) => {
