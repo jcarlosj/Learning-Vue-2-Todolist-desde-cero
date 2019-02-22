@@ -17,12 +17,12 @@ Vue .component( 'app-task', {
         };
     },
     template: '#task-template',
-    props: [ 'tasks', 'task', 'index' ],     // tasks, task e index están disponibles dentro del componente (por lo que podemos hacer referencia a task usando this)
+    props: [ 'task', 'index' ],     // task e index están disponibles dentro del componente (por lo que podemos hacer referencia a task usando this)
     methods: {
         edit() {
             // Evita que pueda editar multiples tareas
             // FIXME:  this .editing ya no hace parte de la propiedad (he quitado 'task' como parámetro del callback y funciona)
-            this .tasks .forEach( () => {
+            this .$parent .tasks .forEach( () => {
                 this .editing = false;
             });
 
@@ -40,7 +40,7 @@ Vue .component( 'app-task', {
             this .editing = false;
         },
         remove() {
-            this .tasks .splice( this .index, 1 );
+            this .$parent .tasks .splice( this .index, 1 );
         }
     }
 });
