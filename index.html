@@ -67,15 +67,15 @@
           <template v-if="!task .editing">
               <span class="pl-2 pr-2 flex-grow-1" :class="{ editing: task .editing, completed: !task .pending }">{{ task .description }}</span>
               <span>
-                  <a @click="editTask" class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><app-icon type="edit"></a>
-                  <a @click="deleteTask" class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><app-icon type="delete"></a>
+                  <a @click="edit" class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><app-icon type="edit"></a>
+                  <a @click="remove" class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><app-icon type="delete"></a>
               </span>
           </template>
           <template v-else>
               <input class="w-75" type="text" v-model="draft">
               <span>
-                  <a @click="updateTask" class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><app-icon type="done"></a>
-                  <a @click="discardTask" class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><app-icon type="close"></a>
+                  <a @click="update" class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><app-icon type="done"></a>
+                  <a @click="discard" class="btn btn-link btn-sm" :class="!task .pending ? 'disabled' : ''" href="#"><app-icon type="close"></a>
               </span>
           </template>
         </li>

@@ -13,7 +13,7 @@ Vue .component( 'app-task', {
     template: '#task-template',
     props: [ 'tasks', 'task', 'index' ],     // tasks, task e index están disponibles dentro del componente (por lo que podemos hacer referencia a task usando this)
     methods: {
-        editTask() {
+        edit() {
             // Evita que pueda editar multiples tareas
             this .tasks .forEach( () => {
                 this .task .editing = false;
@@ -22,17 +22,17 @@ Vue .component( 'app-task', {
             this .draft = this .task .description;   // Crea Borrador de la tarea
             this .task .editing = true;
         },
-        toggleStatus: function() {
+        toggleStatus() {
             this .task .pending = !this .task .pending;
         },
-        updateTask() {
+        update() {
             this .task .description = this .draft;   // Actualiza la descripción de la tarea
             this .task .editing = false;
         },
-        discardTask() {
+        discard() {
             this .task .editing = false;
         },
-        deleteTask() {
+        remove() {
             this .tasks .splice( this .index, 1 );
         }
     }
