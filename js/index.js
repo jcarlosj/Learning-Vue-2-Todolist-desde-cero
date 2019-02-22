@@ -10,6 +10,9 @@ Vue .component( 'app-icon', {
     }
 });
 Vue .component( 'app-task', {
+    data: {
+
+    },
     template: '#task-template',
     props: [ 'tasks', 'task', 'index' ],     // tasks, task e index están disponibles dentro del componente (por lo que podemos hacer referencia a task usando this)
     methods: {
@@ -62,11 +65,12 @@ let task = new Vue({
             }
         ]
     },
+    /* Practica no recomendada */
     created() {
-        this .tasks .forEach( function( task ) {
+        this .tasks .forEach( ( task ) => {
             // task .editing = false;               // Crea la propiedad editting para todas las tareas (SIN getters & setters como una propiedad nativa del objeto 'task')
             this .$set( task, 'editing', false );   // Crea la propiedad editting para todas las tareas (CON getters & setters como una propiedad nativa del objeto 'task')
-        }. bind( this ));                           // Permite asociar this al flujo interno del callback
+        });
     },
     methods: {
         createTask() {
