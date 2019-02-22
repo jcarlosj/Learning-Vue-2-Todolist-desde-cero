@@ -22,12 +22,12 @@ Vue .component( 'app-task', {
     props: [ 'task', 'index' ],     // task e index están disponibles dentro del componente (por lo que podemos hacer referencia a task usando this)
     created() {
         // Escucha Evento
-        EventBus .$on( 'editing', function( index ) {
+        EventBus .$on( 'editing', ( index ) => {
             if( index != this .index ) {
                 this .discard();
                 console .log( 'Discarting: ' + this .index );
             }
-        } .bind( this ));       // Para asegurarnos que dentro de nuestra función anónima this se refiere al componente
+        });
     },
     methods: {
         edit() {
