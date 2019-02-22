@@ -10,30 +10,34 @@ Vue .component( 'app-icon', {
     }
 });
 Vue .component( 'app-task', {
-    data: {
-
+    data: function() {              // Definición de la data (propiedades) de un componente unicamente
+        return {
+            editing: false,
+            draft: ''
+        };
     },
     template: '#task-template',
     props: [ 'tasks', 'task', 'index' ],     // tasks, task e index están disponibles dentro del componente (por lo que podemos hacer referencia a task usando this)
     methods: {
         edit() {
             // Evita que pueda editar multiples tareas
+            // FIXME:  this .editing ya no hace parte de la propiedad (he quitado 'task' como parámetro del callback y funciona)
             this .tasks .forEach( () => {
-                this .task .editing = false;
+                this .editing = false;
             });
 
             this .draft = this .task .description;   // Crea Borrador de la tarea
-            this .task .editing = true;
+            this .editing = true;
         },
         toggleStatus() {
             this .task .pending = !this .task .pending;
         },
         update() {
             this .task .description = this .draft;   // Actualiza la descripción de la tarea
-            this .task .editing = false;
+            this .editing = false;
         },
         discard() {
-            this .task .editing = false;
+            this .editing = false;
         },
         remove() {
             this .tasks .splice( this .index, 1 );
@@ -45,7 +49,6 @@ let task = new Vue({
     el: '#app',
     data: {
         new_task: '',
-        draft: '',
         tasks: [
             {
                 description: 'Aprender Foundation',
@@ -64,13 +67,6 @@ let task = new Vue({
                 pending: false
             }
         ]
-    },
-    /* Practica no recomendada */
-    created() {
-        this .tasks .forEach( ( task ) => {
-            // task .editing = false;               // Crea la propiedad editting para todas las tareas (SIN getters & setters como una propiedad nativa del objeto 'task')
-            this .$set( task, 'editing', false );   // Crea la propiedad editting para todas las tareas (CON getters & setters como una propiedad nativa del objeto 'task')
-        });
     },
     methods: {
         createTask() {
