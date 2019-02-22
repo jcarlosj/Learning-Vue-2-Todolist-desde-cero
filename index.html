@@ -32,7 +32,7 @@
             <h5 class="card-title">Listado de tareas</h5>
 
             <ul class="list-group tasks">
-              <app-task v-for="(task, index) in tasks" :task="task" :index="index" :key="task .id"></app-task>
+              <li is="app-task" v-for="(task, index) in tasks" :task="task" :index="index" :key="task .id"></li>
             </ul>
             <a @click="deleteTasksCompleted()" href="#">Eliminar todas las tareas completadas</a>
             <br>
